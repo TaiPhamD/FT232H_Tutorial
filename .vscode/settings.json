@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "execution": "cpp",
+        "vector": "cpp",
+        "__config": "cpp"
+    }
+}
