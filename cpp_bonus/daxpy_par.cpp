@@ -37,16 +37,16 @@ void initialize(std::vector<double> &x, std::vector<double> &y) {
   assert(x.size() == y.size());
   // DONE: Parallelize initialization of `x`. Notice that `x.data()` is captured by value.
   auto ints = std::views::iota(0);
-  std::for_each_n(std::execution::par_unseq, ints.begin(), x.size(), [x = x.data()](int i) { x[i] = (double)i; });
+  std::for_each_n(std::execution::par, ints.begin(), x.size(), [x = x.data()](int i) { x[i] = (double)i; });
   // DONE: Parallelize initialization of `y`
-  std::fill_n(std::execution::par_unseq, y.begin(), y.size(), 2.);
+  std::fill_n(std::execution::par, y.begin(), y.size(), 2.);
 }
 
 /// DAXPY: AX + Y: sequential algorithm version
 void daxpy(double a, std::vector<double> const &x, std::vector<double> &y) {
   assert(x.size() == y.size());
   /// DONE: Parallelize DAXPY computation. Notice that `a` is captured by value.
-  std::transform(std::execution::par_unseq, x.begin(), x.end(), y.begin(), y.begin(),
+  std::transform(std::execution::par, x.begin(), x.end(), y.begin(), y.begin(),
                  [a](double x, double y) { return a * x + y; });
 }
 
